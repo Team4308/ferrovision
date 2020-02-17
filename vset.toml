@@ -17,4 +17,4 @@ percent_filled_max = 100.0
 
 [output]
 team_num = 0
-zmq_ip = "192.168.0.99"
+zmq_ip = "10.43.8.2"
