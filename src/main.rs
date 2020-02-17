@@ -18,12 +18,9 @@ use std::cmp::Ordering;
 use std::fs::File;
 use std::convert::TryInto;
 
-struct TrackingData {
-	cnt: VectorOfPoint,
-	hull: VectorOfPoint,
-	rect: RotatedRect,
-	bounding: Rect,
-}
+mod modules;
+use crate::modules::TrackingData;
+use crate::modules::input::PiCameraInput;
 
 struct VisionSettings {
 	frame_width: i64,
@@ -89,7 +86,7 @@ fn main() {
 	};
 
 	// ZeroMQ Init
-
+	
 		
 	//Open Camera
 	let mut cap = open_camera(0, vset_height, vset_width);
@@ -143,7 +140,7 @@ fn main() {
 						});
 					}
 
-					imgproc::draw_contours(&mut frame, &cnts, -1, Scalar::new(0., 0., 255., 0.), 3, LINE_8, &no_array().unwrap(), i32::max_value(), Point::new(0, 0)).unwrap();
+					imgproc::draw_contours(&mut frame, &cnts, -1, Scalar::new(0., 0., 255., 0.), 2, LINE_8, &no_array().unwrap(), i32::max_value(), Point::new(0, 0)).unwrap();
 
 					tracked_objects.retain(|x| check_object(x, &vsettings));
 
@@ -154,9 +151,9 @@ fn main() {
 					for obj in tracked_objects_sorted.rev() {
 						let mut cnt_draw = opencv::types::VectorOfVectorOfPoint::new();
 						cnt_draw.push(opencv::types::VectorOfPoint::from_iter(obj.cnt.iter()));
-						imgproc::draw_contours(&mut frame, &cnt_draw, -1, Scalar::new(255., 0., 0., 0.), 3, LINE_8, &no_array().unwrap(), i32::max_value(), Point::new(0, 0)).unwrap();	
+						imgproc::draw_contours(&mut frame, &cnt_draw, -1, Scalar::new(255., 0., 0., 0.), 2, LINE_8, &no_array().unwrap(), i32::max_value(), Point::new(0, 0)).unwrap();	
 
-						imgproc::rectangle(&mut frame, obj.bounding.clone(), Scalar::new(0., 255., 255., 0.), 3, LINE_8, 0).unwrap();
+						imgproc::rectangle(&mut frame, obj.bounding.clone(), Scalar::new(0., 255., 255., 0.), 2, LINE_8, 0).unwrap();
 
 						tracked_center[0] += obj.bounding.x as f64;
 						tracked_center[1] += obj.bounding.y as f64;
@@ -214,7 +211,7 @@ fn open_camera(cam_num: i32, height: i64, width: i64) -> VideoCapture {
 	cap.open(cam_num).unwrap();
 	cap.set(4, height as f64).unwrap();
 	cap.set(3, width as f64).unwrap();
-	cap.set(5, 80.).unwrap();
+	cap.set(5, 120.).unwrap();
 	cap
 }
 
