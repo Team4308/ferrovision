@@ -8,6 +8,8 @@ use opencv::core::*;
 
 use toml::Value;
 
+use std::any::Any;
+
 pub struct TrackingData {
 	pub cnt: VectorOfPoint,
 	pub hull: VectorOfPoint,
@@ -20,21 +22,21 @@ pub struct OutputData {
 }
 
 pub trait InputModule {
-	fn new(settings: Value) -> Self;
 	fn run(&mut self) -> Mat;
+	fn as_any(&mut self) -> &dyn Any;
 }
 
 pub trait ThresholdModule {
-	fn new(settings: Value) -> Self;
 	fn run(&mut self) -> TrackingData;
+	fn as_any(&mut self) -> &dyn Any;
 }
 
 pub trait FilterModule {
-	fn new(settings: Value) -> Self;
-	fn run(&mut self, object: TrackingData) -> bool;
+	fn run(&mut self, object: &TrackingData) -> bool;
+	fn as_any(&mut self) -> &dyn Any;
 }
 
 pub trait OutputModule {
-	fn new(settings: Value) -> Self;
 	fn run(&mut self, data: OutputData);
+	fn as_any(&mut self) -> &dyn Any;
 }

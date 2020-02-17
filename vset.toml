@@ -1,6 +1,8 @@
-[input]
-width = 288
-height = 192
+[pipeline]
+input = "picamera"
+threshold = "color"
+filter = ["contourarea"]
+output = "zeromq"
 
 [threshold]
 colorl = [50, 100, 70]
@@ -18,3 +20,12 @@ percent_filled_max = 100.0
 [output]
 team_num = 4308
 zmq_ip = "192.168.0.99"
+
+[input]
+width = 288
+height = 192
+fps = 120
+
+[filter.contourarea]
+min = 0.0
+max = 20.0
