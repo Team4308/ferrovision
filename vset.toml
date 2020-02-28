@@ -1,20 +1,29 @@
-[input]
-width = 288
-height = 192
+[pipeline]
+input = "picamera"
+threshold = "complexcolor"
+filter = ["contourarea", "percentfilled"]
+output = "nt"
 
-[threshold]
-colorl = [50, 100, 70]
-coloru = [70, 255, 255]
-
-[filter]
+[tracking]
 num_tracked_contours = 1
 
-cnt_area_min = 0.0
-cnt_area_max = 100.0
-
-percent_filled_min = 90.0
-percent_filled_max = 100.0
+[threshold]
+colorl = [50, 100, 30]
+coloru = [70, 255, 255]
 
 [output]
-team_num = 0
-zmq_ip = "10.43.8.2"
+team_num = 4308
+ip = "127.0.0.1:1735"
+
+[input]
+width = 848
+height = 480
+fps = 120
+
+[filter.contourarea]
+min = 0.0
+max = 20.0
+
+[filter.percentfilled]
+min = 90.0
+max = 100.0
