@@ -30,8 +30,8 @@ impl PiCameraInput {
 		cap.set(4, settings["input"]["height"].as_integer().unwrap() as f64).unwrap();
 		cap.set(3, settings["input"]["width"].as_integer().unwrap() as f64).unwrap();
 		cap.set(5, settings["input"]["fps"].as_integer().unwrap() as f64).unwrap();
-		cap.set(10, settings["input"]["brightness"].as_integer().unwrap() as f64).unwrap();
-		cap.set(11, settings["input"]["contrast"].as_integer().unwrap() as f64).unwrap();
+		cap.set(10, settings["input"]["brightness"].as_float().unwrap()).unwrap();
+		cap.set(11, settings["input"]["contrast"].as_float().unwrap()).unwrap();
 		Self {
 			cap: cap
 		}	

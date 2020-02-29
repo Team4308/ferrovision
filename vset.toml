@@ -19,8 +19,8 @@ ip = "127.0.0.1:1735"
 width = 848
 height = 480
 fps = 120
-brightness = 100
-contrast = 100
+brightness = 0.1
+contrast = 0.1
 
 [filter.contourarea]
 min = 0.0
