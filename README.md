@@ -7,6 +7,7 @@ Ferrovision is a FRC vision system created in rust for high performance and extr
 ### Prerequisites
 
 - A raspberry pi 3 or 4
+- A raspberry pi camera v2
 
 1. Clone https://gist.github.com/1473d39a706ba07c012319f27b259b8f.git.
 2. Run the script with `./setup_ferrovision.sh --install`
